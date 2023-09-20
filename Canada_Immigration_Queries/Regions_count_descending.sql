@@ -2,4 +2,4 @@
 
 select region,count(*) from can_imm.canada_data
 group by region
-order by count(*) desc
+order by count(*) desc;
