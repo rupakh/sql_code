@@ -49,6 +49,7 @@ in the 'Others:' box add the line 'OPT_LOCAL_INFILE=1'.
 -- Load the file now:
 LOAD DATA LOCAL INFILE 'C:/Users/rupak/OneDrive/Desktop/sql_code/sql_code/Canada_Immigration_Queries/canadian_immigration_data.csv' INTO TABLE can_imm.canada_data_1 
 FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES;
 
@@ -67,8 +68,66 @@ DELETE FROM can_imm.canada_data_1;
  
  -- Selecting particular rows:
 SELECT * FROM can_imm.canada_data_1
-WHERE REGION='Southern Asia'
+WHERE REGION='Southern Asia';
 
 
+-- Selecting particular columns:
+SELECT country FROM can_imm.canada_data_1
+WHERE REGION='Northern Africa';
+
+-- Selecting DISTINCT values of a column from a table:
+SELECT distinct region
+FROM can_imm.canada_data_1;
+-- 23 distinct regions
+
+-- Sorting data:
+SELECT * FROM can_imm.canada_data_1
+ORDER BY CONTINENT;
+
+-- Sorting data in descending order
+SELECT * FROM can_imm.canada_data_1
+ORDER BY CONTINENT desc;
+
+-- Sorting data using multiple columns
+SELECT * FROM can_imm.canada_data_1
+ORDER BY CONTINENT,REGION desc;
+
+-- Retrieve data only for NOT NULL data
+SELECT * FROM can_imm.canada_data_1
+WHERE CONTINENT IS NOT NULL;
+
+-- Retrieve data only for NULL data
+SELECT * FROM can_imm.canada_data_1
+WHERE CONTINENT IS NULL;
+
+-- Using date functions
+SELECT curdate(), YEAR(curdate()), MONTH(curdate()), DAYOFMONTH(curdate()), DAY(curdate());
+
+SELECT curdate(), YEAR(curdate()), MONTH(curdate()), DAYOFMONTH(curdate()), DAY(curdate())
+WHERE MONTH(curdate())=9;
+
+-- DATE_ADD adds dates based on the interval - in this case, 1 month
+SELECT curdate(), YEAR(curdate()), MONTH(curdate()), DAYOFMONTH(curdate()), DAY(curdate())
+WHERE MONTH(curdate())+1 = MONTH(DATE_ADD(CURDATE(),INTERVAL 1 MONTH));
+
+-- Add 1 day to the current day
+SELECT curdate() + INTERVAL 1 DAY;
+
+-- Working with NULL values
+SELECT 1 IS NULL, 1 IS NOT NULL;
+
+-- Pattern matching query
+SELECT * FROM can_imm.canada_data_1
+WHERE CONTINENT LIKE 'A%'
+ORDER BY CONTINENT;
+
+-- Find continents ending with 'ca'
+SELECT * FROM can_imm.canada_data_1
+WHERE CONTINENT LIKE '%ca'
+ORDER BY CONTINENT;
+
+-- Using REGEXP
+SELECT * FROM can_imm.canada_data_1
+WHERE REGEXP_LIKE(CONTINENT, '^a');
 
 

@@ -2,7 +2,7 @@
  
 Hi there,
 
-Thank you for taking the time to visit my GitHub profile.
+Thank you for taking the time to visit my GitHub profile!
 
 I am a data engineer based in Toronto, Canada.
 
